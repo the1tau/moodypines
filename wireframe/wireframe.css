@@ -1,0 +1,183 @@
+/* ============================================================
+   Moody Pines — Wireframe design language
+   Medium-fidelity, grayscale, real copy, placeholder imagery.
+   Annotations (designer notes) render in a single clay accent.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root{
+  --paper:#f4f3f1;
+  --paper-2:#ecebe8;
+  --card:#ffffff;
+  --ink:#1c1b1a;
+  --ink-2:#444240;
+  --ink-3:#74716d;
+  --line:#cfccc7;
+  --line-2:#dad7d2;
+  --fill:#dedbd6;       /* generic gray block */
+  --fill-2:#e7e4df;
+  --accent:oklch(0.62 0.11 48);     /* clay — used ONLY for designer annotations */
+  --accent-soft:oklch(0.62 0.11 48 / 0.12);
+  --radius:10px;
+  --maxw:1100px;
+  --font:'Archivo',system-ui,sans-serif;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+}
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:var(--font);
+  background:var(--paper);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+  line-height:1.5;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+
+/* ---------- faux browser chrome ---------- */
+.chrome{
+  display:flex;align-items:center;gap:14px;
+  padding:10px 16px;background:var(--paper-2);
+  border-bottom:1px solid var(--line);
+  position:sticky;top:0;z-index:50;
+}
+.chrome .dots{display:flex;gap:7px}
+.chrome .dots i{width:11px;height:11px;border-radius:50%;background:var(--line);display:block}
+.chrome .url{
+  font-family:var(--mono);font-size:12px;color:var(--ink-3);
+  background:var(--card);border:1px solid var(--line);
+  padding:5px 12px;border-radius:20px;flex:1;max-width:360px;
+}
+
+/* ---------- site nav ---------- */
+.nav{
+  display:flex;align-items:center;justify-content:space-between;
+  gap:24px;padding:20px 40px;border-bottom:1px solid var(--line);
+  background:var(--paper);
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;letter-spacing:-.02em}
+.brand .mark{width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:18px solid var(--ink)}
+.nav .links{display:flex;gap:28px;font-size:15px;color:var(--ink-2);font-weight:500}
+.nav .links a:hover{color:var(--ink)}
+.nav-cta{display:flex;align-items:center;gap:14px}
+
+/* ---------- layout ---------- */
+.page{max-width:var(--maxw);margin:0 auto;padding:0 40px}
+.full{width:100%}
+section{padding:72px 0}
+/* sections that ALSO carry .page for width must keep vertical padding
+   (.page's horizontal padding would otherwise override the section rule) */
+section.page{padding-top:72px;padding-bottom:72px}
+.tight{padding:48px 0}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--ink-3);text-transform:uppercase;margin:0 0 18px}
+h1{font-size:60px;line-height:1.02;letter-spacing:-.03em;font-weight:800;margin:0 0 22px;text-wrap:balance}
+h2{font-size:38px;line-height:1.08;letter-spacing:-.02em;font-weight:700;margin:0 0 16px;text-wrap:balance}
+h3{font-size:21px;line-height:1.2;letter-spacing:-.01em;font-weight:700;margin:0 0 8px}
+p{margin:0 0 16px;color:var(--ink-2);font-size:17px;max-width:62ch}
+.lead{font-size:20px;color:var(--ink-2)}
+.small{font-size:14px;color:var(--ink-3)}
+.center{text-align:center}
+.center p{margin-left:auto;margin-right:auto}
+
+/* ---------- buttons (wireframe style) ---------- */
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font);font-weight:600;font-size:15px;
+  padding:13px 22px;border-radius:8px;border:1.5px solid var(--ink);background:var(--ink);color:var(--paper);cursor:pointer}
+.btn-ghost{background:transparent;color:var(--ink)}
+.btn.sm{padding:9px 16px;font-size:14px}
+
+/* ---------- placeholder imagery ---------- */
+.ph{
+  position:relative;border-radius:var(--radius);overflow:hidden;
+  background:
+    repeating-linear-gradient(135deg,var(--fill) 0 11px,var(--fill-2) 11px 22px);
+  border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+}
+.ph span{
+  font-family:var(--mono);font-size:12.5px;color:var(--ink-3);
+  background:var(--paper);padding:6px 12px;border-radius:6px;border:1px solid var(--line);
+  max-width:80%;line-height:1.4;
+}
+.ph.portrait{aspect-ratio:3/4}
+.ph.square{aspect-ratio:1/1}
+.ph.wide{aspect-ratio:16/9}
+.ph.tall{aspect-ratio:4/5}
+
+/* ---------- generic blocks ---------- */
+.grid{display:grid;gap:24px}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:26px}
+.bar{height:10px;border-radius:6px;background:var(--fill);margin:7px 0}
+.bar.w80{width:80%}.bar.w60{width:60%}.bar.w40{width:40%}.bar.w90{width:90%}
+.divider{height:1px;background:var(--line);border:0;margin:0}
+.tag{display:inline-block;font-family:var(--mono);font-size:12px;color:var(--ink-3);
+  border:1px solid var(--line);border-radius:20px;padding:4px 12px}
+.num{font-family:var(--mono);font-size:13px;color:var(--ink-3)}
+.bg-2{background:var(--paper-2)}
+.bg-ink{background:var(--ink);color:var(--paper)}
+.bg-ink p{color:#b9b6b2}.bg-ink .eyebrow{color:#8d8a86}
+
+/* ---------- comparison table (AI-company value props) ---------- */
+.cmp{display:grid;grid-template-columns:0.85fr 1.15fr 1.15fr;margin-top:30px;
+  border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.cmp>div{padding:16px 18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);font-size:14.5px;line-height:1.45}
+.cmp .corner{background:var(--paper-2)}
+.cmp .span{grid-column:2 / span 2;font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--ink-3);background:var(--paper-2);text-align:center}
+.cmp .rowlabel{font-weight:700;color:var(--ink);background:var(--paper-2);display:flex;align-items:center;font-size:15px}
+.cmp .h{font-weight:700;font-size:15px;letter-spacing:-.01em}
+/* the highlighted Moody Pines column */
+.cmp .mp{background:var(--card);color:var(--ink);font-weight:500;
+  box-shadow:inset 2px 0 0 var(--ink),inset -2px 0 0 var(--ink)}
+.cmp .mp.h{background:var(--ink);color:var(--paper);
+  box-shadow:inset 2px 0 0 var(--ink),inset -2px 0 0 var(--ink),inset 0 2px 0 var(--ink)}
+.cmp .mp.last{box-shadow:inset 2px 0 0 var(--ink),inset -2px 0 0 var(--ink),inset 0 -2px 0 var(--ink)}
+/* the muted traditional column */
+.cmp .trad{color:var(--ink-3)}
+.cmp .trad.h{color:var(--ink-2);background:var(--paper-2)}
+
+/* ---------- designer annotations (the only color) ---------- */
+.note{
+  position:relative;font-family:var(--mono);font-size:12.5px;line-height:1.45;
+  color:var(--accent);border:1px dashed var(--accent);background:var(--accent-soft);
+  border-radius:8px;padding:10px 14px 10px 30px;margin:0 0 22px;max-width:70ch;
+}
+.note::before{content:"✱";position:absolute;left:12px;top:9px;font-size:13px}
+.note b{font-weight:600}
+.no-notes .note{display:none}
+
+/* direction banner (top of each homepage variant) */
+.concept{
+  font-family:var(--mono);background:var(--accent);color:#fff;
+  padding:8px 40px;font-size:12.5px;letter-spacing:.03em;display:flex;gap:10px;align-items:center;
+}
+.concept b{font-weight:600}
+.no-notes .concept{display:none}
+
+/* ---------- footer ---------- */
+.footer{background:var(--ink);color:#b9b6b2;padding:56px 0 36px;margin-top:40px}
+.footer .page{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:32px}
+.footer h4{color:var(--paper);font-size:13px;font-family:var(--mono);text-transform:uppercase;letter-spacing:.05em;margin:0 0 14px;font-weight:500}
+.footer a{display:block;color:#b9b6b2;font-size:14px;margin-bottom:9px}
+.footer a:hover{color:var(--paper)}
+.footer .brand{color:var(--paper)}
+.footer .brand .mark{border-bottom-color:var(--paper)}
+.footer .fine{grid-column:1/-1;border-top:1px solid #3a3836;margin-top:28px;padding-top:20px;font-size:12.5px;color:#7c7975;display:flex;justify-content:space-between}
+
+/* ---------- responsive-ish ---------- */
+@media(max-width:880px){
+  h1{font-size:42px}h2{font-size:30px}
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  .nav .links{display:none}
+  .footer .page{grid-template-columns:1fr 1fr}
+  .cmp{grid-template-columns:1fr 1fr;font-size:13px}
+  .cmp>div{padding:12px 12px}
+  .cmp .rowlabel{grid-column:1 / -1;background:var(--paper-2)}
+  .cmp .corner{display:none}
+  .cmp .span{grid-column:1 / -1}
+}

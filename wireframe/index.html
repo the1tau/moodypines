@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Moody Pines — Wireframes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+:root{
+  --paper:#f4f3f1;--paper-2:#ecebe8;--ink:#1c1b1a;--ink-2:#444240;--ink-3:#74716d;
+  --line:#cfccc7;--accent:oklch(0.62 0.11 48);--font:'Archivo',system-ui,sans-serif;--mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:var(--font);background:var(--paper-2);color:var(--ink);display:flex;flex-direction:column;height:100vh;overflow:hidden}
+
+.bar{display:flex;align-items:center;gap:18px;padding:11px 20px;background:var(--paper);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.bar .brand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:16px;letter-spacing:-.02em;white-space:nowrap}
+.bar .brand .mark{width:0;height:0;border-left:8px solid transparent;border-right:8px solid transparent;border-bottom:16px solid var(--ink)}
+.bar .label{font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3)}
+
+.group{display:flex;align-items:center;gap:6px;padding:4px;background:var(--paper-2);border:1px solid var(--line);border-radius:10px}
+.group .gl{font-family:var(--mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding:0 8px}
+.tab{font-family:var(--font);font-size:13.5px;font-weight:600;color:var(--ink-2);background:transparent;border:0;padding:7px 13px;border-radius:7px;cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--ink)}
+.tab.active{background:var(--ink);color:var(--paper)}
+
+.spacer{flex:1}
+.toggle{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink-2);cursor:pointer;user-select:none;white-space:nowrap}
+.toggle input{display:none}
+.switch{width:38px;height:22px;border-radius:20px;background:var(--line);position:relative;transition:.18s}
+.switch::after{content:"";position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.18s}
+.toggle input:checked + .switch{background:var(--accent)}
+.toggle input:checked + .switch::after{transform:translateX(16px)}
+.dotmark{display:inline-block;width:9px;height:9px;border:1px dashed var(--accent);background:oklch(0.62 0.11 48 / 0.18);border-radius:2px}
+
+.stage{flex:1;position:relative;background:var(--paper-2);overflow:hidden}
+iframe{width:100%;height:100%;border:0;background:var(--paper);display:block}
+
+.hint{font-family:var(--mono);font-size:11px;color:var(--ink-3);padding:6px 20px;background:var(--paper);border-top:1px solid var(--line);display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:980px){.bar{gap:10px}.group .gl{display:none}}
+</style>
+</head>
+<body>
+
+<div class="bar">
+  <div class="brand"><span class="mark"></span> Moody Pines</div>
+  <span class="label">Wireframes · v1</span>
+
+  <div class="group" id="grp-home">
+    <span class="gl">Homepage</span>
+    <button class="tab" data-src="home-a.html">A · Booth</button>
+    <button class="tab" data-src="home-b.html">B · Manifesto</button>
+    <button class="tab" data-src="home-c.html">C · Marketplace</button>
+    <button class="tab active" data-src="home-d.html">D · Combined</button>
+  </div>
+
+  <div class="group" id="grp-inner">
+    <span class="gl">Pages</span>
+    <button class="tab" data-src="for-talent.html">For Talent</button>
+    <button class="tab" data-src="for-ai-companies.html">For AI Companies</button>
+    <button class="tab" data-src="about.html">About</button>
+  </div>
+
+  <div class="spacer"></div>
+
+  <label class="toggle">
+    <input type="checkbox" id="notes" checked>
+    <span class="switch"></span>
+    <span><span class="dotmark"></span> Designer notes</span>
+  </label>
+</div>
+
+<div class="stage">
+  <iframe id="frame" src="home-d.html" title="Wireframe preview"></iframe>
+</div>
+
+<div class="hint">
+  <span id="now">Direction D — “Combined” · working merge, building section by section</span>
+  <span>Medium-fi · grayscale · real provisional copy · placeholder imagery</span>
+</div>
+
+<script>
+const frame = document.getElementById('frame');
+const tabs = [...document.querySelectorAll('.tab')];
+const notes = document.getElementById('notes');
+const now = document.getElementById('now');
+
+const blurbs = {
+  'home-a.html':'Direction A — “Inside the Booth” · documentary-led, advocacy first',
+  'home-b.html':'Direction B — “The Manifesto” · editorial & typographic, strongest advocacy voice',
+  'home-c.html':'Direction C — “The Marketplace” · platform-forward, two-sided spine',
+  'home-d.html':'Direction D — “Combined” · working merge, building section by section',
+  'for-talent.html':'For Talent · supply-side — answers the five talent fears',
+  'for-ai-companies.html':'For AI Companies · demand-side — quality, rights, legal protection, speed',
+  'about.html':'About · mission, positioning, founders, the brand tension'
+};
+
+function pushNotes(){
+  try{ frame.contentWindow.postMessage({type:'mp-annotations', show:notes.checked}, '*'); }catch(e){}
+}
+
+tabs.forEach(t => t.addEventListener('click', () => {
+  tabs.forEach(x => x.classList.remove('active'));
+  t.classList.add('active');
+  const src = t.dataset.src;
+  frame.src = src + (notes.checked ? '' : '?notes=0');
+  now.textContent = blurbs[src] || '';
+}));
+
+notes.addEventListener('change', pushNotes);
+frame.addEventListener('load', pushNotes);
+</script>
+</body>
+</html>
